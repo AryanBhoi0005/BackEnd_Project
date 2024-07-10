@@ -1,0 +1,11 @@
+{
+  "name": "l_5_backend_",
+  "version": "1.0.0",
+  "description": "My first Project ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "AryanBhoi",
+  "license": "ISC"
+}
