@@ -1,0 +1,57 @@
+Connecting Database
+------------------------------------------------
+=>.env is an environment variable and import it 
+  as early as possible and try to implement it  
+  in index.js so as soon as the first file is  
+  loaded it is executed
+->0.0.0.0/0 is allow everyone IP however in production we dont't allow allow from anywhere 
+->If we didn't add a user we can add a user who  
+ has all access to DB
+
+=>Remove the ending slash from URL
+
+=>There are 2 ways of executing DB
+  1.As index.js is first file to be started  
+    directly keep DB connection in it
+ 2.Create a separate folder and keep the  
+   connection in it and then import it into  
+   index.js
+
+->Install all mongoose, express, dotenv
+=>Database is always at another continent
+=>Always use try and catch or promises as there    
+  will be many issues while connecting DB
+
+--------------------------------------------------
+While Connecting DB keep 2 things in mind
+1.Use try and catch and promises 
+2.Use async and await 
+------------------------------------------------
+=>Never connect a DB with a single line
+=>We can immediately execute a function using 
+  ()() = iffy
+=>Always start ur iffy with a ; as it will throw 
+  an error if previous line is not ended with ;
+=>Ahead of DB string also use DB name
+-----------------------------------------------
+=>Creating index.js inside db folder
+=>Process is current ongoing process
+=>connection.host helps us to know which host 
+  are we connecting to host,server etc
+----------------------------------------------
+
+=>When using import dotenv make changes in package.json too 
+"scripts": {
+    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
+  },
+------------------------------------------------=>While importing and exporting dont't just use constants use constants.js
+------------------------------------------------
+**Three Steps to remember**
+1.Keep ur DB name same in both MongoDb and name 
+  created in constants
+2.Allows remove "\" from end of Mongo String as  
+  it takes in as a string and may throw a error 
+  while parsing
+3.If parser error check for String typed in or 
+ code for string $ and & and much more if parser  
+ error then always go for MongoString

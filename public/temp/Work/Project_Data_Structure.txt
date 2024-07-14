@@ -1,0 +1,49 @@
+Data Model Link
+=>https://app.eraser.io/workspace/YtPqZ...
+
+----------------------------------------
+=>"temp" folder created is ignored by git as
+  git tracks files and also
+=>".gitkeep" file is created to keep a track  
+  of empty folder that may be added later on 
+  which also may be needed to added into git
+=>".gitignore" is used to handle sensitive 
+  data which we don't want to include in git 
+  hub
+=> Use gitignore generator which helps to     
+   handle sensitive data
+  -> Choose Node and then copy and paste 
+     into .gitignore
+------------------------------------------
+As ".env" file is ignored in git we can create a .env.sample file which is not included in .gitignore so now we can add this data 
+-----------------------------------------
+=>In Js importing is done by two steps 
+  -Common Js
+  -Module 
+=>package.json->above main add
+ ->"type":"module",
+ -As we'll be importing by the means of 
+  import mongoose from 'mongoose'
+-----------------------------------------
+=> npm i -D nodemon [Read Doc]
+  -> Creates a development dependency 
+     which is only used in development and  
+     makes no issues in Production 
+=> npm i nodemon = Main Dependency
+
+Eg-Here instead of "start":"node nodemon" we use 
+   "dev":"nodemon/src/index.js" start it 
+------------------------------------------------
+=>When we import .env we use common Js and not 
+ module [require('dotenv').config()] so its an issue as mentioned above as "type":"module"
+------------------------------------------------
+=>When there's an empty folder git tends to ignore that and so we use ".gitkeep" to add it too as an temp folder 
+------------------------------------------------
+=>You can also commit changes from branch sign on left side of vs code [Never use that]
+->Just press 
+------------------------------------------------
+=>We can use prettier code formatter extension
+-"npm i -D prettier"
+=> Create ".prettierrc"
+=>Create ".prettierignore" to add the files 
+ which are not be touched by prettier
