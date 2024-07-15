@@ -1,0 +1,42 @@
+Read express documentation 
+=>Req and Res APIs
+=>Whenever we use middleware or config settings we use it through 
+  "app.use"  
+
+=>Install cookie parser 
+=>cors package
+
+->Read cors doc to check cors_Options to take in 
+  url from where which frontend components can 
+  access the backend 
+=>CORS_ORIGIN=* -Allow access form everywhere
+
+=>Express Config 
+->express.json is used to accept json files 
+->multer is a middleware used for file upload to  
+  backend
+->express.urlencoded is used to take in a url and 
+  extended keyword helps us to take in obj inside   
+  obj
+->express.static -To store files and folders
+->cookie.parser - Used to perform CRUD operations 
+  on User's Browser
+  -With the help of cookie parser we can have
+   secured cookies which can only be accessed by 
+   server[read and remove]
+
+------------------------------------------------
+Use of middleware -SS
+->Consider user wants to log into Instagram and  
+  sends a req but middleware here acts as check  
+  post for checking if user is authorized or not
+------------------------------------------------
+Utilities
+->We'll be using Db connection many number of 
+  times for that we create a function and import 
+  it whenever we need to use it 
+-----------------------------------------------
+ApiError and ApiResponses 
+-Structure for proper Error and Responses
+
+**Check Doc for Status Code**

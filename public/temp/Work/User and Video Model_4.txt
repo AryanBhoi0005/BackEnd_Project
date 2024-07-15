@@ -1,0 +1,21 @@
+User and Video Model
+------------------------------------------------
+->We don't mention unique id because as we MongoDb 
+  saves a user it automatically generates a unique  
+  id
+-------------------------------------------------
+Avatar and CoverImage
+=> We will save this on a thirdparty app and it 
+  will provide us with a url which we will save as 
+  a string in DB 
+-------------------------------------------------
+Watch History and Owner
+=>We are creating an objArray[] where everytime a 
+ video is viewed we will add the video id into the  
+ array
+=>Owner to mention whose video is being viewed
+------------------------------------------------
+index:true -Schema
+=>Providing index for the fields optimizes the 
+  searches in DB it is a better practice if the 
+  field is going to be used for searching a lot 
