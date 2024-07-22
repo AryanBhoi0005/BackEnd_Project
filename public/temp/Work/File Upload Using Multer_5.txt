@@ -1,0 +1,62 @@
+File Upload Using Multer
+------------------------------------------------
+-> File Handling is a task associated with 
+   BackEnd
+   Engineers
+-> File Handling is not majorly done on our own  
+   server for that we use AWS and other 
+
+=>Cloudinary is a SDK, It takes file from the 
+  user and uploads it on the server however in 
+  production lvl we follow 2 step process 
+  1.Take file from user and store it in   
+    localhost
+  2.Upload it to server 
+-> We follow this 2 step process so if there is  
+   an error while uploading a file we can re-
+   attempt it
+
+
+=>There are two types of file upload [Read Docs]
+  1.Multer 
+  2.Express File Upload 
+
+=>Go to Cloudinary and choose Node js
+->npm i cloudinary and npm i multer
+
+=>As it a reusable code we store it in Util
+=>We can also give custom naming 
+
+=>Nodejs FS stands for file System which helps 
+  in read, write, upload etc
+=>In FS files are Linked and Unlinked and  
+  whenever a file is deleted it gets unlinked 
+  from Fs but the file is still stored in Fs
+-----------------------------------------------
+
+=>Copy Cloudinary configuration from website
+=>As key and value is going to be a sensitive 
+  data we store it in env file 
+=>Then cut and paste the values into env files 
+  from Util
+=>Then import .env files into Util using
+  process.env._NamesOfEnvFilesCreated_
+=>There are multiple options available for
+  uploading files on Cloudinary
+=>We used try and catch block and upload 
+  whatever we need 
+
+------------------------------------------------
+Multer
+------------------------------------------------->Read Multer doc how we need to upload 1 or 
+  multiple files and create it as a middleware 
+  to call it whenever we need to upload 
+  something we can call it 
+=> Read about how to upload as well as how and 
+   where to store it we can store it in Disk 
+   as well as Buffer [Memory Storage]
+->Copy Disk Storage code
+
+=>After creating a Middleware we will Route it
+  and whenever we want to store it we will can 
+  func

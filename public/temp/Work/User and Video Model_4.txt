@@ -19,3 +19,103 @@ index:true -Schema
 =>Providing index for the fields optimizes the 
   searches in DB it is a better practice if the 
   field is going to be used for searching a lot 
+-----------------------------------------------
+=>Aggregation PipeLine and Aggregation queries
+  are the true power of MongoDb
+=>"mongoose-aggregate-paginate-v2" read doc and 
+  install the package 
+=>import it in video.model.js
+=>Go to mongoose docs and on left hand side view 
+  "Middleware"
+->We can add middleware plugins or we can create 
+  our own plugins
+"Eg-
+videoSchema.plugin(mongooseAggregatePaginate)
+//Now we can use aggregation Queries"
+------------------------------------------------
+=>There is a difference between "Bcrypt" and 
+  "Bcrypt.js" read docs but mostly same
+=>"npm install bcrypt" 
+=>Bcrypt-"Helps in hashing Password"
+------------------------------------------------
+=>JWT - "JsonWebToken" -read docs
+=>To view Tokens go on website "JWT.io"
+=>Used for CryptoGraphy or Encryption
+=>secret is what makes our token unique 
+=>"npm i bcrypt jsonwebtoken"
+
+=>Direct Encryption is not possible so we take use of middleware hooks
+=>"Pre" Hook just before a data is saved it is 
+  encrypted or PreHook helps in changes just   
+  before a data is saved 
+  =>We can place any code in "Pre" and run it 
+    just before the data is saved 
+=>Read in docs the event which we want to   
+  perform 
+  Eg-validate
+     save
+     remove
+     updateOne
+     deleteOne
+=> Eg-
+     userSchema.pre("save", async function(next) {})
+     Here arrrow function is not used bcoz it 
+     creates prbs and we cannot access 
+     ModelSchemaFields and also it is a lengthy 
+     funtion so use "async"
+=>next here is a flag called to pass on move to 
+  next
+ 
+=>Eg-
+    userSchema.pre("save", async function(next) {
+    if(!this.isModified("password")) return next()
+    this.password=bcrpyt.hash(this.password,10)
+    next()
+})
+=>Due to Pre everytime there is a change just before save, password is hashed so we use if condition to use hash only when data field is first created as password and password is updated
+=>Here 10 represents Salts or hash rounds
+
+=>We can also create Custom methods 
+Eg- userSchema.methods.isPasswordCorrect=async 
+    function() {} 
+=>"Bcrypt.compare(password entered,password saved)"  ->Return T or F
+------------------------------------------------
+**JWT in .env file** => {Payload,Url,Expiry}
+
+=>Read TOKEN structure from JWT.io
+=>JWT is a bearer token meaning whoever has the  
+  token can access the data just like a key 
+  ->Read Docs-GitHub Link
+=>ACCESS_TOKEN_SECRET- Copy from JWT.io Encoded
+=>ACCESS_TOKEN_EXPIRY -1d
+=>REFRESH_TOKEN_SECRET= Create ur own or copy
+=>REFRESH_TOKEN_EXPIRY=10d
+->Not necessary for all CAPS 
+-----------------------------------------------
+=>this. keyword is used to get data from DB it 
+  it has access to DB
+=>username:this.username AND "username" is 
+  Schema field
+
+=>
+userSchema.methods.generateAccessToken=function(){
+  return jwt.sign(
+    {
+      _id:this._id,
+      email:this.email,
+      username:this.username,
+      fullName:this.fullName
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn:process.env.ACCESS_TOKEN_EXPIRY
+    }
+  )
+}
+
+=>It has Payload where you access data db data
+=>Url of access token from .env
+=>It's Expiry from env 
+=>Refresh token is the same just the difference 
+  is it's payload or data retrieval is less
+
