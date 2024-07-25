@@ -1,0 +1,41 @@
+Creating Controller and Routing 
+
+=>We export controller and router and import them 
+ in app.js
+=>When we import from different files we mostly use app.use not app.get
+
+Standard Practise
+-------------------------------------------------
+app.use("/api/v1/users",userRouter)
+
+->/api/v1 is a important standard practise 
+
+
+=> app.js->userRouter->user.routes.js->"/....."
+
+-------------------------------------------------
+->Here we called user.routes using any name 
+  UserRouter that is only possible when 
+  we do "export default"
+->When we import {registerUser} we do export {   }
+
+-------------------------------------------------
+=>Whenever we write a function we have to return 
+-------------------------------------------------
+
+=>Thunder Client [For API Testing]
+  OR
+=>Postmen
+
+------------------------------------------------->Go to PostMen and click on "+"
+-> http://localhost:8000/api/v1/users/register
+->Check the req we area sending is it is get or 
+  post and then click send 
+
+=>return res.status(200).json({
+        message:"ok"
+    })
+
+->In this we can change the status from 
+  200 to 400 but status convention changes from 
+ "ok" to "Bad Request"
