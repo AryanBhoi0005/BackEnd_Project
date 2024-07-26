@@ -1,0 +1,49 @@
+Logic Building requires real world feedback 
+->Check your logic in POSTMAN
+
+->Getting details from the user involve GET and POST
+  req and what data we will be taking in will depend 
+  on the User Schema model we have created 
+->If user already exist can be taken care of by 
+  unique username and email 
+
+=> 
+    //Get user details from Frontend 
+    //Validation -Not empty
+    //Check if User already exist:email,Uname
+    //Check for images and Avatar 
+    //Upload them to cloudinary, avatar check
+    //Create user object - create entry in DB
+    // remove password and refresh token  
+       //field from response
+    //Check for user creation 
+    //return response 
+--------------------------------------------------
+
+=> If data is coming from "form or json" then we can
+  find it in req.body
+=>In Postmen "Params" is used to get data from 
+  frontend but we use "Body" 
+=>In none dropdown list we can also choose form-data
+=> x-bound-data is "URL" data
+=>raw data means JSON data 
+--------------------------------------------------
+=>Injecting Middleware
+
+=>As it is a POST req so we will post our data in 
+  postmen and it will be highlighted in in terminal
+=>For fileHandling we use multer as a middleware and 
+  write it just before "/register" route 
+
+=>Express gives us access to req.body
+=>Multer gives access to req.files 
+
+---------------------------------------------------
+=>Once the file is completely uploaded on cloudinary
+  we will also delete it from the localPath
+=> ? is used which states if present it returns or   
+   else throws null
+---------------------------------------------------
+=>User.create is used to create a DB to store the values in DB
+=>TO check if DB user is created everytime a user is 
+ created a ID is used and we can check it
