@@ -5,11 +5,11 @@ const storage = multer.diskStorage({
     //file -All files stored
     //cb- Callback
     destination: function (req, file, cb) {
-      cb(null,"./public/temp")
+      cb(null,"C:/Users/Aryan Bhoi/Desktop/BackEnd/L_5_BackEnd_/public/temp")
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname)
     }
   })
   
-  export const upload = multer({storage, })
+  export const upload = multer({storage })

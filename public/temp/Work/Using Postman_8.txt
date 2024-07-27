@@ -1,0 +1,50 @@
+Using Postman
+-----------------------------------------------------
+->Algorithm are steps to solve large prbs by breaking 
+  them into smaller steps 
+
+=>In industries we have share our knowledge with 
+  frontend team too called postman collections
+=>Here we are using "form data" instead of "raw"
+  because in raw we are not provided a option to send 
+  files as per needs
+=>Make sure to "tick" the box to ensure data is sent
+=>we get a option of choosing text or file on the side 
+  in a drop down arrow choose file in it while 
+  uploading avatar or coverImage
+=>Keep the key values the same as mentioned 
+=>To check if our images are uploaded got to 
+  cloudinary and check for "media explorer" to check 
+  the data we have uploaded  
+=>The response URL we have received is a public URL
+  so we can directly paste the link and view in 
+  Browser
+
+->Check for keys which you have to send in the 
+  DB object you have created 
+----------------------------------------------------
+->Copy these from Cloudinary API keys
+
+CLOUDINARY_CLOUD_NAME=dp58psx09
+CLOUDINARY_API_KEY=317664533928915
+CLOUDINARY_API_SECRET=8Kx7KcH4zQImSdq3OdvCUe5B5PM
+--------------------------------------------------
+
+=>Whenever there is ? we get errors such as cannot
+  define properties of undefined
+=>Array.isArray is used to check if required array is present or not 
+
+----------------------------------------------------
+->Using PostMan Collection [VIP]
+=>Create new Collection, add name to the url and save
+=>Copy the common part of the string
+  "http://localhost:8000/api/v1/"
+=>Go to environment variables give name, variable 
+  name and initial and current value as "String"
+=>"No Environment" change it to the folder where you 
+  want to share "Folder name"
+=>Now go back to collection add the route without 
+  common string and in place of it "{{" and we get the 
+  option of server or common string
+
+

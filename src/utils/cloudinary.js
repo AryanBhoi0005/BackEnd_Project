@@ -19,6 +19,8 @@ import fs from "fs";
        })
        //File has been uploaded 
        console.log("File is uploaded on CLoudinary",response.url);
+       //To unlink the file once uploaded
+       fs.unlinkSync(localFilePath)
        return response;
         }catch(error){
         fs.unlinkSync(localFilePath) //remove the locally saved temp file as an error has occured or file upload has failed 
