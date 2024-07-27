@@ -20,7 +20,7 @@ const registerUser=asyncHandler(async(req,res)=>{
     
     //From UserSchema
     const {fullName,email,username,password}=req.body
-    console.log("email:",email); 
+    // console.log("email:",email); 
     //to print 
     // if(fullName==""){
     //     //Go and check what does it return 
@@ -39,7 +39,7 @@ const registerUser=asyncHandler(async(req,res)=>{
     if(existedUser){
         throw new ApiError(409,"User with email or username already exist")
     }
-    console.log(req.files);
+    // console.log(req.files);
 
     // ? is used which states if present it returns or else throws null
     const avatarLocalPath=req.files?.avatar?.[0]?.path;
