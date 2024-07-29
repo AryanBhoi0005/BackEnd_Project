@@ -1,0 +1,20 @@
+Refresh Token 
+=>View video 16 again 
+
+->There are two types of token 
+  1.Access   -Short lived
+  2.Refresh  -Long lived
+->They are generated in the same way the only 
+  difference is the time of expiry 
+
+->While calling the DB check whether it is expensive 
+  or not 
+
+->While logging out we can't find userID by asking him 
+  to input data again in case of LogIn, So we design our 
+  own middleware
+
+=>When a user logs out we have to clear the cookies and 
+  also reset the access tokens
+=>Cookie is used to access the cookies 
+=>Req has Access to the cookies

@@ -4,6 +4,22 @@ import { User } from "../models/user.model.js";
 import {uploadOnCloudinary} from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponses.js";
 
+//We are going to use it over and over again so we are making it as methods
+const generateAccessandRefreshTokens= async(userId)=>{ //Func takes in userID
+    try{
+         const user=await User.findById(userId)
+         const accessToken=user.generateAccessToken()
+         const refreshToken=user.generateRefreshToken()
+         //Adding token to DB
+         user.refreshToken= refreshToken
+         //Saving the token in DB
+         await user.save({validateBeforeSave:false})
+         return{accessToken,refreshToken}
+    }catch(error){
+        throw new ApiError(500,"Something went wrong while generating refresh and access token")
+    }
+}
+
 const registerUser=asyncHandler(async(req,res)=>{
       
     //Get user details from Frontend 
@@ -96,4 +112,95 @@ const registerUser=asyncHandler(async(req,res)=>{
 
 })
 
-export {registerUser}
+const loginUser=asyncHandler(async(req,res)=>{
+    // req body->data
+    // username or email login type
+    // find the user
+    // password check 
+    // access and refresh token
+    //send cookies 
+  
+    //taking data from user
+    const{email,username,password}=req.body
+    if(!username || !email){ 
+        throw new ApiError(400," username or password is required")
+    }
+
+    //Finding username or password in DB
+    const user=await User.findOne({
+        $or:[{username},{email}]
+        //Passing in an array object with values 
+        // on basis of which we can check or condition
+    })
+    //Here is User is mongoose obj and user is obj created by you 
+    if(!user){
+        throw new ApiError(404,"User doesn't exist");
+    }
+
+    //Password check already created in userModel
+    const isPasswordValid=await user.isPasswordCorrect(password)
+    //From user model
+    if(!isPasswordValid){
+        throw new ApiError(401,"Invalid User credentials");
+    }
+
+    //Calling the funtion to check User validity
+    //Similarly to req.body
+    const {accessToken,refreshToken}=await generateAccessandRefreshTokens(user._id)
+    
+    //Calling DB again as earlier access and refresh token where not included in user 
+    const loggedInUser=await User.findById(user._id).select("-password -refreshToken")
+
+    //Sending data back in form of cookies and understanding what data we need to share
+    const options={ 
+        //Without these cookies are directly modified through frontend and now only through server side
+        httpOnly:true,
+        secure:true
+    }
+
+    return res
+    .status(200)
+    .cookie("accessToken",accessToken,options)
+    .cookie("refreshToken",refreshToken,options)
+    .json(
+        //We are sending access and refresh token
+        //again in case user want to save it locally
+        new ApiResponse(
+            200,{
+                user:loggedInUser,accessToken,refreshToken
+            },
+            "User logged in Successfully"
+                        )
+         )
+})
+
+//We can't log out user directly as we don't have any access to its id
+ const logoutUser=asyncHandler(async(req,res)=>{
+  await User.findByIdAndUpdate(
+       req.user._id,
+       { //Check and updates the fields req
+        $set: {
+            refreshToken:undefined
+        }
+       },
+       {
+        new:true
+       }
+   )
+   const options={ 
+    //Without these cookies are directly modified through frontend and now only through server side
+    httpOnly:true,
+    secure:true
+   }
+   return res.status(200)
+   .clearCookie("accessToken",options)
+   .clearCookie("refreshToken",options)
+   .json(new ApiResponse(200,{},"User logged Out"))
+
+ })
+
+export {
+    registerUser,
+    loginUser,
+    logoutUser
+}
