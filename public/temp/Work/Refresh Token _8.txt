@@ -18,3 +18,23 @@ Refresh Token
   also reset the access tokens
 =>Cookie is used to access the cookies 
 =>Req has Access to the cookies
+
+=>To the changes made you can go to GitHub and check for 
+  commits made to it 
+
+=>Before logging in remember to register first 
+
+=>Access token are short lived and present with user
+=>Refresh token are saved in DB and helps to keep 
+  session on 
+=>Session token or session storage are used to refresh 
+  the session everytime access token expires we get a 
+  session timeout and a mssg appears and we refresh 
+  the session and so new access token along with 
+  refresh token is called other than logging in again 
+  and matches with refresh token in the DB and session 
+  continues and refresh token is updated 
+
+=>Verify jwt is used to decode the token as token 
+  received by DB is raw decoded token while received 
+  by the user is encrypted one so we need to decode it 
