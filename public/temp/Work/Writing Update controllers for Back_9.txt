@@ -1,0 +1,15 @@
+Writing Update controllers for Backend 
+---------------------------------------------------------
+->Users are the subscribers and the channel they are 
+ subscribing are users itself 
+->subscription model is created 
+
+->While updating keep one thing in mind that only the 
+  logged-in user can update
+->With the help of Auth middleware and if the user is 
+  logged in we can easily get his info as his info is 
+  sent through req.body 
+-In Production whenever there is a need to change or 
+ update a file always try to keep it in separate 
+ controllers as it is easier to manage and helps with 
+ network congestion 

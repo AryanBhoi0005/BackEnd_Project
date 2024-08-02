@@ -4,6 +4,7 @@ import { User } from "../models/user.model.js";
 import {uploadOnCloudinary} from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponses.js";
 import JsonWebTokenError  from "jsonwebtoken";
+import { response } from "express";
 
 //We are going to use it over and over again so we are making it as methods
 const generateAccessandRefreshTokens= async(userId)=>{ //Func takes in userID
@@ -237,9 +238,132 @@ const loginUser = asyncHandler(async (req, res) => {
     }
  })
 
+const changeCurrentPassword = asyncHandler(async(req,res)=>{
+    //You can take as many fields from the user as  you want 
+    //If want to add confirm password too then just add the field {oldpass,newpass,confirmpass}
+    const{oldPassword,newPassword}=req.body
+
+    /*
+    const{oldPassword,newPassword,confPassword}=req.body
+    if(!(newPassword==confPassword)){
+       throw new ApiError(401,"Password is not same")
+    }
+       */
+
+    //If user is changing the password he is already logged in and so we can get his data from req.body
+    const user=await User.findById(req.user?._id)
+    //Returns true or false value 
+    const isPasswordCorrect=await user.isPasswordCorrect(oldPassword);
+    if(!isPasswordCorrect){
+        throw new ApiError(400,"Invalid old Password")
+    }
+    //new Password is created 
+    user.password=newPassword
+    //user.save() is called to save the password and so pre hook is called which before saving hashes the password 
+    await user.save({validateBeforeSave:false})
+
+    return res
+    .status(200)
+    .json(new ApiResponse(200,{},"Password Changed Successfully"))
+})
+
+const getCurrentUser=asyncHandler(async(req,res)=>{
+    return res
+    .status(200)
+    .json(200,req.user,"Current user fetched successfully")
+})
+
+const updateAccountDetails=asyncHandler(async(req,res)=>{
+    const {fullName,email} =req.body
+    if(!fullName || !email){
+        throw new ApiError(400,"All fields are required")
+    }
+    //Callin mongoDB operators
+    const user=User.findByIdAndUpdate(
+        req.user?._id,
+        {
+             $set:{
+                fullName:fullName,
+                email:email
+             }
+        },
+        {new:true} //returns updated information
+    ).select("-password")
+
+    return res
+    .status(200)
+    .json(new ApiResponse(200,user,"Account details updated succcessfully"))
+})
+
+const updateUserAvatar=asyncHandler(async(req,res)=>{
+    //Using multer
+    const avatarLocalPath=req.files?.path
+    //We can also store the image in localPath not necessary that we need cloudinary 
+    if(!avatarLocalPath){
+        throw new ApiError(400,"Avatar file is missing")
+    }
+    const avatar=await uploadOnCloudinary(avatarLocalPath)
+
+    if(!avatar.url){
+        throw new ApiError(400,"Error while updating avatar")
+    }
+    const user=await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            //Set is used bcoz we need so update specific obj not every value 
+            $set:{
+                avatar:avatar.url
+            }
+        },{new:true}
+    ).select("-password")
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,user,"Avatar updated successfuly")
+    )
+})
+
+const updateUserCoverIamge=asyncHandler(async(req,res)=>{
+    //Using multer and not files just file as single file
+    const coverImageLocalPath=req.file?.path
+    //We can also store the image in localPath not necessary that we need cloudinary 
+    if(!coverImageLocalPath){
+        throw new ApiError(400,"Cover Image file is missing")
+    }
+    const coverImage=await uploadOnCloudinary(coverImageLocalPath)
+
+    if(!coverImage.url){
+        throw new ApiError(400,"Error while updating avatar")
+    }
+    const user=await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            //Set is used bcoz we need so update specific obj not every value 
+            $set:{
+                coverImage:coverImage.url
+            }
+        },{new:true}
+    ).select("-password")
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,user,"Cover Image updated successfuly")
+    )
+})
+
+
+
 export {
     registerUser,
     loginUser,
     logoutUser,
-    refreshAccessToken
+    refreshAccessToken,
+    changeCurrentPassword,
+    getCurrentUser,
+    updateAccountDetails,
+    updateUserAvatar,
+    updateUserCoverIamge
+
 }
