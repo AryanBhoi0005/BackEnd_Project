@@ -1,5 +1,5 @@
 Writing Update controllers for Backend 
----------------------------------------------------------
+--------------------------------------------------------
 ->Users are the subscribers and the channel they are 
  subscribing are users itself 
 ->subscription model is created 
@@ -13,3 +13,58 @@ Writing Update controllers for Backend
  update a file always try to keep it in separate 
  controllers as it is easier to manage and helps with 
  network congestion 
+
+--------------------------------------------------------
+Subs Model- Every time a New Doc is created 
+--------------------------------------------------------
+->Both User and Channel are created and referenced by 
+  the same User itself
+-> Everytime a user subs a channel a new doc is created 
+  with its info
+
+**** No of Subs of a channel ****
+=> Everytime we have to calculate no of subs of a 
+   channel we won't count  the no of subs added but we 
+   calculate the "No of doc with the same channel name" 
+   as every time a subs is added a new doc is created 
+=> No of docs = No of subs
+
+*****No of channels you subscribed*****
+=>This time we will select the Doc with same subs or 
+  user name as a new doc is created as we sub 
+
+
+
+
+
+
+
+
+
+
+
+
+
+'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
