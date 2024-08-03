@@ -55,9 +55,13 @@ Eg-
 ->new author array is created where we are trying to get 
   first element from author_details array
 --------------------------------------------------------
-Watch History pipeline
+Like, playlist, Tweet models
 --------------------------------------------------------
-
+->aggregate-paginate model is used bcoz there might be 
+  multiple pages and comments and we can't display every
+  one of it so we use it to maintain it
+->plugin is used to define from point to where videos or 
+  comments need to be displayed
 
 
 
