@@ -5,7 +5,7 @@ MongoDB Aggregation Pipelines -SD2 OR SD3 Lvl
 ->Performs an Operation on input document and provide 
   filtered data to the next operation 
 ->Document that are output from a stage are passed on to
-  the next stage 
+  the next stage    
 
 =>Array format
 Eg-
@@ -25,4 +25,41 @@ Eg-
 =>addfields is used to add new fields 
 =>$project is used to pass only those fields to the next 
   stage that are specified by you 
+  1. "1" used to include that field
+  2. "0" used to exclude that field
+=>$first is used to return first field from that array
+=>$To represent a field we use "$"
+=>$in is used to check if what we are searching is 
+  present in array or obj or not 
+
+=>While adding a field in Mongo first add the field then 
+  change the datatype
+--------------------------------------------------------
+Eg-
+   [
+  {
+    $lookup: {
+      from:"authors",
+      localField:"author_id",
+      foreignField:"_id",
+      as:"author_details"
+    }
+  },
+  {$addFields: {
+       author:{
+         $arrayElemAt:["$author_details",0]
+       }
+  }}
+]
+
+->new author array is created where we are trying to get 
+  first element from author_details array
+--------------------------------------------------------
+Watch History pipeline
+--------------------------------------------------------
+
+
+
+
+
 

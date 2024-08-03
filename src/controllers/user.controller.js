@@ -171,12 +171,12 @@ const loginUser = asyncHandler(async (req, res) => {
 
 
 //We can't log out user directly as we don't have any access to its id
- const logoutUser=asyncHandler(async(req,res)=>{
+ const logoutUser=asyncHandler(async(req,res)=>{ 
   await User.findByIdAndUpdate(
        req.user._id,
        { //Check and updates the fields req
-        $set: {
-            refreshToken:undefined
+        $unset: {
+            refreshToken:1 //unset the value
         }
        },
        {
