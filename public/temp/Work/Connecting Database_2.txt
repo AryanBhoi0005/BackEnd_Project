@@ -44,7 +44,8 @@ While Connecting DB keep 2 things in mind
 "scripts": {
     "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
   },
-------------------------------------------------=>While importing and exporting dont't just use constants use constants.js
+------------------------------------------------
+=>While importing and exporting dont't just use constants use constants.js
 ------------------------------------------------
 **Three Steps to remember**
 1.Keep ur DB name same in both MongoDb and name 
@@ -55,3 +56,10 @@ While Connecting DB keep 2 things in mind
 3.If parser error check for String typed in or 
  code for string $ and & and much more if parser  
  error then always go for MongoString
+------------------------------------------------------
+=> Front and Backend should be running on the same 
+   PORT but if they aren't it throws an error to prevent 
+   that we use CORS which connects middleware and to 
+   connect middleware we use "app.use" which runs 
+   middleware before connecting to DB
+   

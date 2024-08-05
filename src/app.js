@@ -4,9 +4,12 @@ import cors from "cors";
 
 const app=express()
 
+// CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
 app.use(cors({
     origin:process.env.CORS_ORIGIN,
+    // origin: process.env.CORS_ORIGIN: This option specifies which origins are allowed to access resources on the server.
     credentials:true
+    // credentials: true: This option allows cookies to be included in requests sent to the server from the allowed origins.
 }))
 app.use(express.json({limit:"16kb",limit:"16kb"}))
 app.use(express.urlencoded({extended:true}))

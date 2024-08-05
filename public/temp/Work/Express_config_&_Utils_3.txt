@@ -1,3 +1,6 @@
+-> Define PORT_NUMBER in .env
+->Also CORS_ORIGIN=*
+
 Read express documentation 
 =>Req and Res APIs
 =>Whenever we use middleware or config settings we use it through 
